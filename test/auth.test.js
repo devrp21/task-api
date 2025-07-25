@@ -1,0 +1,37 @@
+import request from 'supertest';
+import app from '../app.js';
+import { sequelize,User,Task } from '../models/index.js'; // Make sure this file registers models
+;
+
+beforeAll(async () => {
+  try {
+    await sequelize.sync({ force: true }); // Reset DB
+  } catch (err) {
+    console.error('Failed to sync DB:', err);
+    throw err;
+  }
+});
+
+afterAll(async () => {
+  await sequelize.close();
+});
+
+describe('Auth API', () => {
+  test('POST /api/register → should register user', async () => {
+    const res = await request(app).post('/api/register').send({
+      username: 'tesuser',
+      password: 'testpass',
+    });
+    expect(res.statusCode).toBe(201);
+    expect(res.body.message).toBe('User registered successfully');
+  });
+
+  test('POST /api/login → should login user and return token', async () => {
+    const res = await request(app).post('/api/login').send({
+      username: 'testuser',
+      password: 'testpass',
+    });
+    expect(res.statusCode).toBe(200);
+    expect(res.body.token).toBeDefined();
+  });
+});

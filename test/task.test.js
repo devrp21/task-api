@@ -37,8 +37,8 @@ describe('Task API', () => {
       });
 
     expect(res.statusCode).toBe(201);
-    expect(res.body.task.title).toBe('Test Task'); // <-- FIXED
-    taskId = res.body.task.id; // <-- FIXED
+    expect(res.body.task.title).toBe('Test Task');
+    taskId = res.body.task.id; 
   });
 
   test('Get all tasks for user', async () => {

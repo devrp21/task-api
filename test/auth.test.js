@@ -1,11 +1,11 @@
 import request from 'supertest';
 import app from '../app.js';
-import {sequelize} from '../models/index.js'; // Make sure this file registers models
+import {sequelize} from '../models/index.js'; 
 ;
 
 beforeAll(async () => {
   try {
-    await sequelize.sync({ force: true }); // Reset DB
+    await sequelize.sync({ force: true }); 
   } catch (err) {
     console.error('Failed to sync DB:', err);
     throw err;

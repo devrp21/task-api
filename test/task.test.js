@@ -1,6 +1,6 @@
 import request from 'supertest';
 import app from '../app.js';
-import { sequelize, User,Task } from '../models/index.js';
+import {sequelize} from '../models/index.js';
 
 
 let token = '';

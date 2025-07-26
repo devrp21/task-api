@@ -1,6 +1,6 @@
 import request from 'supertest';
 import app from '../app.js';
-import { sequelize,User,Task } from '../models/index.js'; // Make sure this file registers models
+import {sequelize} from '../models/index.js'; // Make sure this file registers models
 ;
 
 beforeAll(async () => {
@@ -19,8 +19,8 @@ afterAll(async () => {
 describe('Auth API', () => {
   test('POST /api/register → should register user', async () => {
     const res = await request(app).post('/api/register').send({
-      username: 'tesuser',
-      password: 'testpass',
+      username: 'tasuser',
+    password: 'taskpass'
     });
     expect(res.statusCode).toBe(201);
     expect(res.body.message).toBe('User registered successfully');
@@ -28,8 +28,8 @@ describe('Auth API', () => {
 
   test('POST /api/login → should login user and return token', async () => {
     const res = await request(app).post('/api/login').send({
-      username: 'testuser',
-      password: 'testpass',
+      username: 'tasuser',
+      password: 'taskpass',
     });
     expect(res.statusCode).toBe(200);
     expect(res.body.token).toBeDefined();
